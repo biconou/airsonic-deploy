@@ -1,0 +1,3 @@
+docker/airsonic/target/dependency/airsonic-main.war
+airsonic*.war
+run
