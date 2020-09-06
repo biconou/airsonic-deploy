@@ -23,6 +23,10 @@ if [[ $# -lt 1 ]] || [[ ! "$1" == "java"* ]]; then
      -DUPNP_PORT=$UPNP_PORT \
      -Djava.awt.headless=true \
      "${java_opts_array[@]}" \
+     -javaagent:elastic-apm-agent-1.18.0.RC1.jar \
+     -Delastic.apm.service_name=airsonic \
+     -Delastic.apm.application_packages=org.airsonic.player \
+     -Delastic.apm.server_urls=http://localhost:8200 \
      -jar airsonic.war "$@"
 fi
 
