@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM ubuntu
 
 LABEL description="Airsonic is a free, web-based media streamer, providing ubiquitious access to your music." \
       url="https://github.com/airsonic/airsonic"
@@ -7,16 +7,16 @@ ENV AIRSONIC_PORT=4040 AIRSONIC_DIR=/airsonic CONTEXT_PATH=/ UPNP_PORT=4041 JVM_
 
 WORKDIR $AIRSONIC_DIR
 
-RUN apk --no-cache add \
+RUN apt-get update; apt-get install -y \
     ffmpeg \
     lame \
     bash \
-    libressl \
+    # libressl \
     fontconfig \
     ttf-dejavu \
     ca-certificates \
     tini \
-    openjdk11-jre
+    openjdk-11-jdk-headless
 
 COPY run.sh /usr/local/bin/run.sh
 
