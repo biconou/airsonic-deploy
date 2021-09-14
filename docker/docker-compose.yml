@@ -15,26 +15,22 @@ services:
         tag: "{{.DaemonName}}(image={{.ImageName}};name={{.Name}};id={{.ID}})"
     restart: on-failure
     volumes:
-     - ${PWD}/run/mariadb:/var/lib/mysql
+     - ${AIRSONIC_DATA}/mariadb:/var/lib/mysql
     ports:
       - "3306:3306"
     command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
-    networks:
-      - airsonic
 
   airsonic:
     build:
       context: airsonic/
     volumes:
-      - "/mnt/DATA/Soulseek Downloads/complete:/airsonic/music"
+      - ${MUSIC_DIR}:/airsonic/music
     devices:
       - /dev/snd
     ports:
       - "4041:4040"
-    networks:
-      - airsonic
 
 networks:
-
-  airsonic:
-    driver: bridge
+  default:
+    external:
+      name: airsonic
