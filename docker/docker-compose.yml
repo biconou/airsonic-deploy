@@ -19,6 +19,7 @@ services:
       context: airsonic/
     volumes:
       - ${MUSIC_DIR}:/airsonic/music
+      - /mnt/DATA/airsonic-data/airsonic/podcasts:/airsonic/podcasts
     devices:
       - /dev/snd
     ports:
