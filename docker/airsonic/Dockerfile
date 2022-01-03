@@ -11,6 +11,7 @@ RUN apt-get update; apt-get install -y \
     ffmpeg \
     lame \
     bash \
+    locales \
     # libressl \
     fontconfig \
     ttf-dejavu \
@@ -26,6 +27,13 @@ COPY target/dependency/airsonic-10.6.2.war airsonic.war
 COPY airsonic.properties data/airsonic.properties
 #https://www.elastic.co/guide/en/apm/agent/java/1.x/setup-javaagent.html
 COPY elastic-apm-agent-1.18.0.RC1.jar elastic-apm-agent-1.18.0.RC1.jar
+
+# Set the locale
+RUN sed -i '/fr_FR.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+ENV LANG fr_FR.UTF-8
+ENV LANGUAGE fr_FR:fr
+ENV LC_ALL fr_FR.UTF-8
 
 EXPOSE $AIRSONIC_PORT
 
