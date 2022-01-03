@@ -20,6 +20,7 @@ services:
     volumes:
       - ${MUSIC_DIR}:/airsonic/music
       - /mnt/DATA/airsonic-data/airsonic/podcasts:/airsonic/podcasts
+      - /mnt/DATA:/mnt/DATA
     devices:
       - /dev/snd
     ports:
