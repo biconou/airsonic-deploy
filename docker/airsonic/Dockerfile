@@ -1,4 +1,5 @@
-FROM alpine:3.11
+#FROM alpine:3.11
+FROM maxleiko/armhf-alpine-java
 
 LABEL description="Airsonic is a free, web-based media streamer, providing ubiquitious access to your music." \
       url="https://github.com/airsonic/airsonic"
@@ -15,8 +16,7 @@ RUN apk --no-cache add \
     fontconfig \
     ttf-dejavu \
     ca-certificates \
-    tini \
-    openjdk11-jre
+    tini
 
 COPY run.sh /usr/local/bin/run.sh
 
