@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:22.04
 
 LABEL description="Airsonic is a free, web-based media streamer, providing ubiquitious access to your music." \
       url="https://github.com/airsonic/airsonic"
@@ -14,7 +14,7 @@ RUN apt-get update; apt-get install -y \
     locales \
     # libressl \
     fontconfig \
-    ttf-dejavu \
+    fonts-dejavu \
     ca-certificates \
     tini \
     openjdk-11-jdk-headless
@@ -23,7 +23,7 @@ COPY run.sh /usr/local/bin/run.sh
 
 RUN chmod +x /usr/local/bin/run.sh
 
-COPY target/dependency/airsonic-10.6.2.war airsonic.war
+COPY airsonic-10.6.2.war airsonic.war
 COPY airsonic.properties data/airsonic.properties
 #https://www.elastic.co/guide/en/apm/agent/java/1.x/setup-javaagent.html
 COPY elastic-apm-agent-1.18.0.RC1.jar elastic-apm-agent-1.18.0.RC1.jar

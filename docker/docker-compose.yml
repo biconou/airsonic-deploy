@@ -4,7 +4,7 @@ services:
 
   database:
     image: postgres:${POSTGRES_VERSION}
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -15,10 +15,11 @@ services:
       - 5433:5432
 
   airsonic:
+    restart: unless-stopped
     build:
       context: airsonic/
     volumes:
-      - ${MUSIC_DIR}:/airsonic/music
+      - /mnt/DATA/REMI/musique/PCDM:/airsonic/music
       - /mnt/DATA/airsonic-data/airsonic/podcasts:/airsonic/podcasts
       - /mnt/DATA:/mnt/DATA
     devices:
@@ -29,4 +30,4 @@ services:
 networks:
   default:
     external:
-      name: airsonic
+      name: traefik_web
